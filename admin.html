@@ -1031,125 +1031,112 @@ th{
 
 
 /* =========================================================
-   AKASA UI REFRESH — solo interfaz, sin cambiar rutas ni lógica
+   AKASA SIGNATURE UI · edición visual
    ========================================================= */
 :root{
-  --bg:#f1eee7;
-  --panel:rgba(255,255,255,.94);
-  --panel-soft:rgba(255,255,255,.84);
-  --text:#202820;
-  --muted:#73796f;
-  --border:rgba(45,62,47,.13);
-  --shadow:0 12px 34px rgba(35,45,34,.075);
-  --shadow-hover:0 18px 44px rgba(35,45,34,.12);
-  --radius:18px;
-  --dark:#202b23;
-  --green:#607762;
-  --green-dark:#435846;
-  --gold:#a1845a;
+  --bg:#e9e2d6;
+  --panel:rgba(255,253,248,.86);
+  --panel-soft:rgba(255,253,248,.68);
+  --text:#24231f;
+  --muted:#777267;
+  --border:rgba(65,55,40,.14);
+  --shadow:0 20px 55px rgba(50,42,29,.10);
+  --shadow-hover:0 28px 70px rgba(50,42,29,.16);
+  --radius:24px;
+  --dark:#22231f;
+  --green:#526b56;
+  --green-dark:#3d5542;
+  --gold:#b09161;
 }
 body::before{
-  background:linear-gradient(rgba(242,239,231,.80),rgba(242,239,231,.86)),url("villa-fondo.png") center/cover no-repeat;
-  filter:blur(7px);
-  animation:none;
+  background:
+    linear-gradient(135deg,rgba(241,233,219,.80),rgba(226,218,201,.76)),
+    url("villa-fondo.png") center/cover no-repeat;
+  filter:blur(6px);
+  animation:backgroundDrift 24s ease-in-out infinite alternate;
 }
-#app{padding:0;}
-.app-shell{grid-template-columns:258px minmax(0,1fr);gap:0;}
+@keyframes backgroundDrift{
+  from{transform:scale(1.035) translate3d(-.4%,0,0)}
+  to{transform:scale(1.085) translate3d(.4%,-.5%,0)}
+}
 .sidebar{
-  background:linear-gradient(165deg,rgba(31,43,34,.98),rgba(40,49,40,.97));
-  padding:26px 17px;
-  box-shadow:8px 0 32px rgba(25,34,26,.12);
-  border-right:1px solid rgba(255,255,255,.07);
+  background:linear-gradient(165deg,rgba(35,37,32,.98),rgba(47,55,44,.97));
+  padding:25px 16px;
 }
-.sidebar-brand{padding:7px 12px 25px;margin-bottom:24px;border-bottom:1px solid rgba(255,255,255,.13);}
-.sidebar-brand strong{font-family:"Manrope",sans-serif;font-size:24px;letter-spacing:.16em;color:#f7f5ef;}
-.sidebar-brand span{display:block;margin-top:6px;line-height:1.6;color:rgba(255,255,255,.62);font-size:11px;letter-spacing:.025em;}
-.sidebar nav{display:grid;gap:6px;}
-.nav-btn{border-radius:12px;padding:13px 14px;font-size:13px;letter-spacing:.005em;}
-.nav-btn:hover{background:rgba(255,255,255,.09);transform:translateX(2px);}
-.nav-btn.active{background:linear-gradient(100deg,rgba(132,160,132,.28),rgba(255,255,255,.08));box-shadow:inset 3px 0 #b9c9b5;color:#fff;}
-.sidebar-bottom{border-top:1px solid rgba(255,255,255,.12);padding-top:14px;}
-.main{padding:32px clamp(18px,3vw,42px);max-width:1680px;width:100%;margin:0 auto;}
-.topbar{padding:5px 0 23px;margin-bottom:26px;border-bottom:1px solid rgba(49,62,48,.13);}
-.topbar h1{font-family:"Manrope",sans-serif;font-size:clamp(26px,2.4vw,34px);font-weight:800;letter-spacing:-.045em;color:#263329;}
-.topbar p{font-size:13px;line-height:1.65;color:#74796f;}
-.status{background:rgba(255,255,255,.78);border:1px solid rgba(65,92,68,.14);padding:10px 14px;color:#506351;font-weight:600;box-shadow:0 4px 14px rgba(37,51,37,.035);}
-.status-dot{background:#628468;}
-.section-panel,.stat-card,.login-card{border:1px solid rgba(255,255,255,.85);box-shadow:var(--shadow);backdrop-filter:blur(18px);}
-.section-panel{border-radius:20px;padding:clamp(18px,2.2vw,28px);margin-bottom:22px;}
-.section-panel:hover{transform:translateY(-1px);box-shadow:var(--shadow-hover);}
-.section-panel h2{font-family:"Manrope",sans-serif;font-size:20px;letter-spacing:-.025em;color:#29372c;}
-.section-description{line-height:1.65;color:#777c72;}
-.stats{gap:15px;margin-bottom:23px;}
-.stat-card{border-radius:18px;padding:22px 22px 20px;background:linear-gradient(145deg,rgba(255,255,255,.97),rgba(250,249,245,.91));position:relative;overflow:hidden;}
-.stat-card::after{content:"";position:absolute;right:-22px;top:-28px;width:88px;height:88px;border-radius:50%;background:rgba(105,133,105,.07);pointer-events:none;}
-.stat-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover);}
-.stat-card span{font-size:12px;font-weight:650;letter-spacing:.025em;color:#777d72;}
-.stat-card strong{font-family:"Manrope",sans-serif;font-size:32px;letter-spacing:-.05em;color:#2b3c2e;}
-.btn{border-radius:11px;padding:11px 16px;font-size:13px;font-weight:700;box-shadow:none;}
-.btn-primary,.btn-green{background:linear-gradient(135deg,#536b56,#3e5743);border:1px solid rgba(43,70,47,.18);color:#fff;}
-.btn-primary:hover,.btn-green:hover{filter:brightness(1.06);transform:translateY(-1px);box-shadow:0 8px 18px rgba(58,82,61,.18);}
-.btn-light{background:#f7f7f2;border:1px solid #e3e5dc;color:#475247;}
-.btn-danger{background:#fff4f2;border:1px solid #f1d7d1;color:#9b4d45;}
-input,select,textarea{border:1px solid #dfe3d9!important;border-radius:11px!important;background:rgba(255,255,255,.9)!important;color:#29332b!important;transition:border-color .18s,box-shadow .18s;}
-input:focus,select:focus,textarea:focus{outline:none;border-color:#829b82!important;box-shadow:0 0 0 4px rgba(103,137,105,.13)!important;}
-label{font-size:12px;font-weight:700;letter-spacing:.01em;color:#596457;}
-table{border-collapse:separate;border-spacing:0;}
-thead th{background:#f4f5ef;color:#667064;font-size:11px;text-transform:uppercase;letter-spacing:.055em;}
-tbody tr:hover{background:rgba(103,132,103,.045);}
-#toast{border-radius:12px;box-shadow:0 12px 32px rgba(20,30,21,.18);}
-.login-card{border-radius:25px;padding:clamp(26px,4vw,42px);background:rgba(255,255,255,.93);}
-.login-card h1{font-family:"Manrope",sans-serif;letter-spacing:-.04em;color:#27372b;}
-.logo-box{border-radius:17px;border:1px solid #eceee7;background:#fff;}
+.sidebar-brand strong{letter-spacing:.17em;font-family:"Manrope",sans-serif}
+.sidebar-brand:after{
+  content:"REAL ESTATE · HAVANA";
+  display:block;color:var(--gold);font-size:9px;letter-spacing:.22em;margin-top:12px;font-weight:800
+}
+.nav-btn{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-btn.active{background:linear-gradient(100deg,rgba(255,255,255,.16),rgba(255,255,255,.06));box-shadow:inset 3px 0 0 var(--gold)}
+.nav-link{margin-top:10px;color:#e5d4b4!important;border:1px solid rgba(255,255,255,.12)}
+.nav-link:hover{background:rgba(176,145,97,.18)!important}
+.main{padding:30px clamp(16px,3vw,42px)}
+.topbar h1{font-family:"Manrope",sans-serif;letter-spacing:-.04em;font-size:clamp(26px,3vw,36px)}
+.status{backdrop-filter:blur(12px);box-shadow:0 7px 20px rgba(40,35,26,.05)}
+.section-panel,.stat-card{border-color:rgba(255,255,255,.78);box-shadow:0 15px 42px rgba(48,40,28,.07)}
+.section-panel{border-radius:25px}
+.stat-card{position:relative;overflow:hidden}
+.stat-card:after{content:"";position:absolute;width:70px;height:70px;right:-25px;top:-25px;border:1px solid rgba(176,145,97,.30);border-radius:50%;box-shadow:0 0 0 10px rgba(176,145,97,.05),0 0 0 22px rgba(176,145,97,.035)}
+.stat-card strong{font-family:"Manrope",sans-serif;letter-spacing:-.04em}
+.btn{border-radius:14px}
+.btn-green{background:linear-gradient(135deg,#617962,#425b47)}
+.btn-primary{background:linear-gradient(135deg,#30312b,#1f201c)}
+.welcome-banner{
+  min-height:260px;position:relative;overflow:hidden;display:flex;align-items:center;
+  padding:clamp(24px,4vw,44px);margin:0 0 24px;border-radius:28px;color:#fff;
+  background:radial-gradient(circle at 82% 22%,rgba(186,157,111,.25),transparent 28%),
+             linear-gradient(115deg,rgba(33,36,30,.98),rgba(58,72,56,.96));
+  box-shadow:0 25px 60px rgba(35,39,31,.19);isolation:isolate;
+  animation:bannerReveal .75s cubic-bezier(.2,.8,.2,1) both;
+}
+.welcome-banner:before,.welcome-banner:after{content:"";position:absolute;pointer-events:none;z-index:-1}
+.welcome-banner:before{width:430px;height:430px;right:-120px;top:-190px;border:1px solid rgba(215,190,149,.26);border-radius:50%;box-shadow:0 0 0 25px rgba(215,190,149,.035),0 0 0 60px rgba(215,190,149,.025)}
+.welcome-banner:after{inset:auto 0 0;height:4px;background:linear-gradient(90deg,#8d9c80,#c6a775,transparent 80%)}
+.banner-copy{position:relative;z-index:2;max-width:650px}
+.banner-eyebrow{font-size:10px;letter-spacing:.22em;font-weight:800;color:#d2b88d}
+.welcome-banner h2{font:700 clamp(28px,3.8vw,43px)/1.1 "Manrope",sans-serif;letter-spacing:-.045em;margin:16px 0 12px}
+.welcome-banner h2 em{font-style:normal;color:#d4bd96}
+.welcome-banner p{color:rgba(255,255,255,.72);max-width:460px;line-height:1.65;margin:0 0 22px}
+.banner-actions{display:flex;gap:10px;flex-wrap:wrap}
+.btn-banner-light{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.22);color:white;text-decoration:none;display:inline-flex;align-items:center}
+.btn-banner-light:hover{background:rgba(255,255,255,.16)}
+.banner-mark{position:absolute;right:8%;top:50%;transform:translateY(-50%);width:190px;height:190px;border:1px solid rgba(214,190,151,.26);border-radius:50%;display:grid;place-items:center;color:rgba(230,211,179,.72);font:500 52px "Manrope",sans-serif;letter-spacing:-.08em}
+.banner-mark:before,.banner-mark:after{content:"";position:absolute;inset:12px;border:1px solid rgba(214,190,151,.16);border-radius:50%}
+.banner-mark:after{inset:-12px;border-style:dashed;animation:slowRotate 42s linear infinite}
+.banner-mark i{position:absolute;width:6px;height:6px;background:#d1b487;border-radius:50%;top:8px;left:50%;box-shadow:0 0 16px rgba(209,180,135,.7)}
+.banner-mark i:nth-of-type(2){top:auto;left:auto;right:20px;bottom:40px}
+.banner-mark i:nth-of-type(3){top:55%;left:5px}
+.code-chip{display:inline-block;padding:3px 7px;border-radius:6px;background:#e9e1d1;color:#5a654f;font-size:10px;letter-spacing:.04em}
+input,textarea,select{border-radius:14px}
+.upload-area{border-radius:20px;background:rgba(246,244,237,.8)}
+.image-item{box-shadow:0 8px 20px rgba(0,0,0,.08)}
+.client-card{border-radius:21px}
+@keyframes bannerReveal{from{opacity:0;transform:translateY(14px) scale(.99)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes slowRotate{to{transform:rotate(360deg)}}
 @media(max-width:800px){
-  .app-shell{grid-template-columns:1fr;}
-  .sidebar{position:relative;height:auto;padding:16px;}
-  .sidebar-brand{padding:4px 7px 15px;margin-bottom:13px;}
-  .sidebar nav{display:flex;gap:7px;overflow-x:auto;padding-bottom:4px;}
-  .nav-btn{flex:0 0 auto;min-height:44px;}
-  .sidebar-bottom{position:static;margin-top:9px;padding-top:9px;}
-  .main{padding:18px 14px 28px;}
-  .topbar{gap:12px;}
-  .status{font-size:12px;}
+  .banner-mark{right:-38px;opacity:.35;width:150px;height:150px}
+  .welcome-banner{min-height:unset}
 }
-/* =========================================================
-   AKASA SIGNATURE UI · navegación, banners y microanimaciones
-   ========================================================= */
-:root{--ak-forest:#1d3027;--ak-forest-2:#294538;--ak-sage:#b9c8b4;--ak-cream:#f6f3ec;--ak-gold:#c6a779;--ak-motion:cubic-bezier(.2,.8,.2,1)}
-.sidebar{position:relative;isolation:isolate;overflow:hidden;background:linear-gradient(155deg,#17271f 0%,#23392e 55%,#18271f 100%);padding:25px 16px 20px;min-height:100%;}
-.sidebar::before{content:"";position:absolute;z-index:-1;width:290px;height:290px;right:-170px;top:100px;border:1px solid rgba(219,230,209,.12);border-radius:50%;box-shadow:0 0 0 28px rgba(219,230,209,.025),0 0 0 58px rgba(219,230,209,.02);}
-.sidebar::after{content:"";position:absolute;z-index:-1;left:-90px;bottom:70px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(173,197,164,.12),transparent 70%);pointer-events:none;}
-.sidebar-brand{display:flex;align-items:center;gap:12px;padding:4px 9px 23px;margin-bottom:25px;border-bottom:1px solid rgba(255,255,255,.12);}
-.brand-mark{width:46px;height:46px;border-radius:15px;background:rgba(255,255,255,.96);display:grid;place-items:center;overflow:hidden;box-shadow:0 8px 22px #0d19124a;flex:0 0 auto;}
-.brand-mark img{width:39px;height:39px;object-fit:contain;}
-.brand-copy{min-width:0}.brand-copy strong{display:block;font:800 20px/1.1 Manrope,sans-serif;letter-spacing:.18em;color:#fff}.brand-copy span{display:block;font-size:8px;letter-spacing:.12em;color:#b9c9bb;margin-top:7px;white-space:nowrap;}
-.menu-caption{font-size:9px;font-weight:800;letter-spacing:.17em;color:#8fa394;padding:0 12px 11px;}
-.admin-navigation{display:grid;gap:8px;}
-.sidebar .nav-btn{position:relative;display:flex;align-items:center;gap:11px;width:100%;min-height:54px;padding:9px 11px;border:1px solid transparent;border-radius:14px;background:transparent;color:rgba(246,248,242,.73);text-align:left;transition:background .25s var(--ak-motion),transform .25s var(--ak-motion),border-color .25s,color .25s;}
-.nav-icon{width:34px;height:34px;display:grid;place-items:center;border-radius:11px;background:rgba(255,255,255,.055);color:#bdcdb8;flex:0 0 auto;transition:background .25s,color .25s,transform .25s;}
-.nav-icon svg{width:17px;height:17px;stroke-width:1.8}.nav-label{font-size:12px;font-weight:650;line-height:1.35;flex:1}.nav-arrow{font-size:13px;opacity:0;transform:translate(-3px,3px);transition:opacity .2s,transform .2s;}
-.sidebar .nav-btn:hover{background:rgba(255,255,255,.075);border-color:rgba(255,255,255,.08);transform:translateX(3px);color:white;}
-.sidebar .nav-btn:hover .nav-icon{background:rgba(188,208,178,.15);transform:scale(1.04);}
-.sidebar .nav-btn.active{background:linear-gradient(110deg,rgba(188,208,178,.19),rgba(255,255,255,.055));border-color:rgba(204,221,194,.19);box-shadow:inset 3px 0 #c8d7be,0 8px 22px rgba(7,17,10,.12);color:#fff;}
-.sidebar .nav-btn.active .nav-icon{background:#d8e3d0;color:#24392b;}.sidebar .nav-btn.active .nav-arrow{opacity:.8;transform:none;}
-.sidebar-site-link{display:flex;align-items:center;gap:10px;text-decoration:none;margin:25px 2px 18px;padding:13px 10px;border-radius:15px;border:1px solid rgba(205,220,196,.22);background:linear-gradient(135deg,rgba(195,214,185,.14),rgba(255,255,255,.035));color:#fff;transition:transform .25s var(--ak-motion),background .25s,border-color .25s;}
-.sidebar-site-link:hover{transform:translateY(-3px);background:rgba(205,220,196,.16);border-color:rgba(205,220,196,.4);}
-.site-link-icon{display:grid;place-items:center;width:33px;height:33px;border-radius:10px;background:#dbe5d3;color:#24392b;flex:0 0 auto}.site-link-icon svg,.site-link-arrow{width:15px;height:15px}.sidebar-site-link strong,.sidebar-site-link small{display:block}.sidebar-site-link strong{font-size:11px;letter-spacing:.01em}.sidebar-site-link small{font-size:9px;color:#b5c5b7;margin-top:4px}.site-link-arrow{margin-left:auto;color:#c7d7c0;flex:0 0 auto}
-.sidebar-bottom{margin-top:auto;padding-top:16px;border-top:1px solid rgba(255,255,255,.12);}.sidebar-user{display:flex;align-items:center;gap:9px;padding:0 8px 13px}.user-avatar{width:33px;height:33px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#d7e2cf,#9caf98);color:#213529;font-weight:800;font-size:12px}.sidebar-user strong,.sidebar-user small{display:block}.sidebar-user strong{font-size:11px;color:#f7f7f0}.sidebar-user small{font-size:9px;color:#9db0a0;margin-top:3px}.online-dot{margin-left:auto;width:7px;height:7px;border-radius:50%;background:#91c99a;box-shadow:0 0 0 4px #91c99a20}.sidebar .logout-nav{min-height:43px;padding-top:6px;padding-bottom:6px;color:#b9c6ba}.sidebar .logout-nav .nav-icon{width:29px;height:29px;background:rgba(255,255,255,.035)}
-.topbar{align-items:center;gap:18px}.topbar-actions{display:flex;align-items:center;justify-content:flex-end;gap:10px;flex-wrap:wrap}.topbar-site-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;background:#263e30;color:#fff;text-decoration:none;font-size:12px;font-weight:750;box-shadow:0 8px 18px #253b2c20;transition:transform .22s var(--ak-motion),box-shadow .22s,background .22s}.topbar-site-btn svg{width:15px;height:15px}.topbar-site-btn:hover{transform:translateY(-2px);background:#385640;box-shadow:0 12px 24px #253b2c2a}
-.section-panel,.stat-card,.login-card{transition:transform .28s var(--ak-motion),box-shadow .28s var(--ak-motion),border-color .28s;}.section-panel:hover{transform:translateY(-2px)}.stat-card{animation:akasa-rise .55s var(--ak-motion) both}.stats .stat-card:nth-child(2){animation-delay:.06s}.stats .stat-card:nth-child(3){animation-delay:.12s}.stats .stat-card:nth-child(4){animation-delay:.18s}
-@keyframes akasa-rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-.btn{transition:transform .2s var(--ak-motion),box-shadow .2s,background .2s,filter .2s}.btn:active{transform:scale(.98)}
-.modal-box{overflow:hidden;border:1px solid rgba(255,255,255,.78);box-shadow:0 28px 90px rgba(22,31,24,.28);animation:akasa-modal-in .32s var(--ak-motion) both;}
-@keyframes akasa-modal-in{from{opacity:0;transform:translateY(16px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
-.property-create-banner{position:relative;isolation:isolate;overflow:hidden;display:flex;align-items:stretch;justify-content:space-between;min-height:180px;margin:0 0 24px;border-radius:19px;background:linear-gradient(105deg,rgba(25,45,33,.96) 0%,rgba(38,62,45,.9) 54%,rgba(43,61,46,.56) 100%),url("villa-fondo.png") center 52%/cover no-repeat;color:#fff;box-shadow:0 14px 35px rgba(27,47,33,.16);}
-.property-create-banner::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,transparent 40%,rgba(229,219,192,.10));}
-.property-banner-copy{position:relative;z-index:2;padding:23px 25px 20px;max-width:600px}.banner-eyebrow{display:inline-flex;align-items:center;gap:6px;font-size:9px;font-weight:800;letter-spacing:.16em;color:#d9e6d0}.banner-eyebrow svg{width:13px;height:13px}.property-banner-copy h3{margin:10px 0 6px;font:750 clamp(20px,2.4vw,28px)/1.15 Manrope,sans-serif;letter-spacing:-.045em;color:#fff}.property-banner-copy p{max-width:440px;margin:0;color:rgba(255,255,255,.77);font-size:11px;line-height:1.65}.banner-steps{display:flex;gap:8px;flex-wrap:wrap;margin-top:17px}.banner-steps span{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border:1px solid rgba(255,255,255,.17);border-radius:9px;background:rgba(255,255,255,.07);font-size:9px;color:#f0f3ec}.banner-steps b{color:#d5e4c9;font-size:9px;letter-spacing:.05em}
-.property-banner-art{position:relative;width:190px;flex:0 0 190px;min-height:180px;overflow:hidden}.banner-orbit{position:absolute;display:block;border:1px solid rgba(232,237,222,.22);border-radius:50%;aspect-ratio:1}.orbit-one{width:190px;right:-30px;top:0;animation:orbit-drift 12s ease-in-out infinite alternate}.orbit-two{width:125px;right:2px;top:34px;border-style:dashed;animation:orbit-drift 10s ease-in-out infinite alternate-reverse}.banner-house-icon{position:absolute;right:48px;top:53px;width:72px;height:72px;display:grid;place-items:center;border-radius:24px;border:1px solid rgba(255,255,255,.34);background:linear-gradient(145deg,rgba(255,255,255,.22),rgba(255,255,255,.07));box-shadow:0 15px 35px #0c1b1045;backdrop-filter:blur(8px);transform:rotate(-5deg);animation:house-float 4.5s ease-in-out infinite}.banner-house-icon svg{width:33px;height:33px;stroke-width:1.4;color:#f4f4e8}.banner-spark{position:absolute;color:#dce9cf;font-size:23px;animation:sparkle 2.6s ease-in-out infinite}.spark-one{right:27px;top:34px}.spark-two{right:123px;top:122px;animation-delay:.8s}@keyframes orbit-drift{to{transform:translate(-8px,7px) rotate(12deg)}}@keyframes house-float{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-7px) rotate(-2deg)}}@keyframes sparkle{0%,100%{opacity:.5;transform:scale(.8)}50%{opacity:1;transform:scale(1.16)}}
-.modal-head{position:relative}.modal-head h2{font-family:Manrope,sans-serif;letter-spacing:-.035em}.form-grid>div{transition:transform .2s var(--ak-motion)}.upload-area{transition:border-color .25s,background .25s,transform .25s}.upload-area:hover{transform:translateY(-2px);border-color:#9bb49a;background:rgba(234,241,230,.72)}.image-grid img{transition:transform .25s var(--ak-motion),box-shadow .25s}.image-grid img:hover{transform:scale(1.035);box-shadow:0 10px 25px #1e2b1d26}
-@media(max-width:800px){.sidebar{min-height:0}.sidebar-brand{padding-bottom:17px}.admin-navigation{display:flex;overflow-x:auto;padding-bottom:5px}.sidebar .nav-btn{flex:0 0 auto;width:auto;min-width:150px}.nav-arrow{display:none}.sidebar-site-link{margin:13px 0}.sidebar-bottom{margin-top:12px}.topbar{align-items:flex-start}.topbar-actions{justify-content:flex-start}.property-create-banner{min-height:165px}.property-banner-copy{padding:20px 17px}.property-banner-art{width:110px;flex-basis:110px;opacity:.85}.banner-house-icon{right:18px;top:52px;width:60px;height:60px}.orbit-one{right:-85px}.orbit-two{right:-52px}.spark-one{right:12px}}
-@media(max-width:520px){.topbar-actions{width:100%;justify-content:space-between}.topbar-site-btn{padding:9px 10px}.property-create-banner{min-height:0}.property-banner-copy{padding:18px 15px}.property-banner-art{position:absolute;right:0;top:0;bottom:0;width:90px;opacity:.35}.property-banner-copy{max-width:100%}.property-banner-copy p{max-width:85%}.banner-steps{gap:5px}.banner-steps span{padding:5px 6px}.sidebar .nav-btn{min-width:138px}.brand-copy span{font-size:7px}}
-@media(prefers-reduced-motion:reduce){.stat-card,.modal-box,.banner-orbit,.banner-house-icon,.banner-spark{animation:none!important}.section-panel,.stat-card,.btn,.sidebar .nav-btn,.topbar-site-btn,.sidebar-site-link,.upload-area{transition:none!important}}
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}
+}
+
+
+
+.feature-banners{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin:0 0 24px}
+.feature-banner{position:relative;display:flex;align-items:flex-start;gap:12px;min-height:145px;padding:18px;border-radius:20px;overflow:hidden;border:1px solid rgba(255,255,255,.72);box-shadow:0 12px 28px rgba(48,40,28,.06);animation:panelEntrance .55s ease both;transition:transform .25s ease,box-shadow .25s ease}
+.feature-banner:nth-child(2){animation-delay:.08s}.feature-banner:nth-child(3){animation-delay:.16s}
+.feature-banner:hover{transform:translateY(-4px);box-shadow:0 18px 36px rgba(48,40,28,.12)}
+.feature-banner-sand{background:linear-gradient(135deg,#f4ead9,#e7dcc8)}
+.feature-banner-olive{background:linear-gradient(135deg,#dfe6d8,#cdd8c6)}
+.feature-banner-cream{background:linear-gradient(135deg,#f7f2e9,#e9e2d6)}
+.feature-icon{flex:0 0 37px;width:37px;height:37px;border-radius:12px;display:grid;place-items:center;background:rgba(255,255,255,.6);font-size:20px;color:#465a45}
+.feature-banner strong{display:block;font:800 14px "Manrope",sans-serif;margin:2px 0 7px}
+.feature-banner p{font-size:12px;line-height:1.55;color:#666257;margin:0;max-width:220px}
+.feature-number{position:absolute;right:13px;bottom:8px;font:700 27px "Manrope",sans-serif;color:rgba(68,79,61,.12)}
+@media(max-width:1050px){.feature-banners{grid-template-columns:1fr}.feature-banner{min-height:unset}}
 
 </style>
 </head>
@@ -1233,32 +1220,53 @@ tbody tr:hover{background:rgba(103,132,103,.045);}
     <aside class="sidebar">
 
       <div class="sidebar-brand">
-        <div class="brand-mark"><img src="akasa.logotipo.svg" alt="Akasa"></div>
-        <div class="brand-copy"><strong>AKASA</strong><span>REAL ESTATE · PANEL PRIVADO</span></div>
+
+        <strong>AKASA</strong>
+
+        <span>
+          Administración inmobiliaria
+        </span>
+
       </div>
 
-      <div class="menu-caption">ESPACIO DE TRABAJO</div>
-      <nav class="admin-navigation" aria-label="Navegación de administración">
-        <button class="nav-btn active" data-section="dashboardSection">
-          <span class="nav-icon"><i data-lucide="layout-dashboard"></i></span><span class="nav-label">Resumen general</span><span class="nav-arrow">↗</span>
+      <nav>
+
+        <button
+          class="nav-btn active"
+          data-section="dashboardSection"
+        >
+          📊 Dashboard
         </button>
-        <button class="nav-btn" data-section="propertiesSection">
-          <span class="nav-icon"><i data-lucide="house"></i></span><span class="nav-label">Inventario de propiedades</span><span class="nav-arrow">↗</span>
+
+        <button
+          class="nav-btn"
+          data-section="propertiesSection"
+        >
+          🏠 Propiedades
         </button>
-        <button class="nav-btn" data-section="clientsSection">
-          <span class="nav-icon"><i data-lucide="contact-round"></i></span><span class="nav-label">Clientes y vendedores</span><span class="nav-arrow">↗</span>
+
+        <button
+          class="nav-btn"
+          data-section="clientsSection"
+        >
+          👤 Clientes
         </button>
+
+        <a class="nav-btn nav-link" href="index.html" target="_blank" rel="noopener">
+          ↗ Ver página oficial
+        </a>
+
       </nav>
 
-      <a class="sidebar-site-link" href="index.html" target="_blank" rel="noopener">
-        <span class="site-link-icon"><i data-lucide="external-link"></i></span>
-        <span><strong>Ver web pública</strong><small>Abrir Akasa Inmobiliaria</small></span>
-        <i data-lucide="arrow-up-right" class="site-link-arrow"></i>
-      </a>
-
       <div class="sidebar-bottom">
-        <div class="sidebar-user"><span class="user-avatar">A</span><span><strong>Administración</strong><small>Sesión privada</small></span><span class="online-dot"></span></div>
-        <button id="logoutBtn" class="nav-btn logout-nav"><span class="nav-icon"><i data-lucide="log-out"></i></span><span class="nav-label">Cerrar sesión</span></button>
+
+        <button
+          id="logoutBtn"
+          class="nav-btn"
+        >
+          ↪ Cerrar sesión
+        </button>
+
       </div>
 
     </aside>
@@ -1280,9 +1288,12 @@ tbody tr:hover{background:rgba(103,132,103,.045);}
 
         </div>
 
-        <div class="topbar-actions">
-          <div class="status"><span class="status-dot"></span>Administrador conectado</div>
-          <a class="topbar-site-btn" href="index.html" target="_blank" rel="noopener"><i data-lucide="external-link"></i> Ver página web</a>
+        <div class="status">
+
+          <span class="status-dot"></span>
+
+          Administrador conectado
+
         </div>
 
       </div>
@@ -1294,6 +1305,19 @@ tbody tr:hover{background:rgba(103,132,103,.045);}
         id="dashboardSection"
         class="page-section"
       >
+
+        <div class="welcome-banner">
+          <div class="banner-copy">
+            <span class="banner-eyebrow">AKASA INMOBILIARIA · ESPACIO PRIVADO</span>
+            <h2>Tu cartera inmobiliaria,<br><em>en un solo lugar.</em></h2>
+            <p>Gestiona anuncios, actualiza precios y mantén cada detalle al día.</p>
+            <div class="banner-actions">
+              <button class="btn btn-green" onclick="openPropertyModal()">＋ Añadir propiedad</button>
+              <a class="btn btn-banner-light" href="index.html" target="_blank" rel="noopener">Explorar web oficial ↗</a>
+            </div>
+          </div>
+          <div class="banner-mark" aria-hidden="true"><span>AK</span><i></i><i></i><i></i></div>
+        </div>
 
         <div class="stats">
 
@@ -1347,6 +1371,23 @@ tbody tr:hover{background:rgba(103,132,103,.045);}
 
         </div>
 
+        <div class="feature-banners">
+          <article class="feature-banner feature-banner-sand">
+            <span class="feature-icon">⌂</span>
+            <div><strong>Ficha completa</strong><p>Código, precio visible, descripción y fotografías en una sola ficha.</p></div>
+            <span class="feature-number">01</span>
+          </article>
+          <article class="feature-banner feature-banner-olive">
+            <span class="feature-icon">↗</span>
+            <div><strong>Publicación directa</strong><p>Activa o pausa anuncios y consulta cómo se ven en la página oficial.</p></div>
+            <span class="feature-number">02</span>
+          </article>
+          <article class="feature-banner feature-banner-cream">
+            <span class="feature-icon">✳</span>
+            <div><strong>Gestión organizada</strong><p>Encuentra propiedades por código, título, ubicación o precio escrito.</p></div>
+            <span class="feature-number">03</span>
+          </article>
+        </div>
 
         <div class="section-panel">
 
@@ -1653,15 +1694,6 @@ tbody tr:hover{background:rgba(103,132,103,.045);}
 
     </div>
 
-    <div class="property-create-banner">
-      <div class="property-banner-copy">
-        <span class="banner-eyebrow"><i data-lucide="sparkles"></i> NUEVA FICHA AKASA</span>
-        <h3>Una propiedad, una nueva oportunidad.</h3>
-        <p>Completa los datos, añade fotografías y decide cuándo mostrarla en la web.</p>
-        <div class="banner-steps"><span><b>01</b> Datos</span><span><b>02</b> Fotografías</span><span><b>03</b> Publicación</span></div>
-      </div>
-      <div class="property-banner-art" aria-hidden="true"><span class="banner-orbit orbit-one"></span><span class="banner-orbit orbit-two"></span><span class="banner-house-icon"><i data-lucide="house"></i></span><span class="banner-spark spark-one">✦</span><span class="banner-spark spark-two">✧</span></div>
-    </div>
 
     <form id="propertyForm">
 
@@ -1673,20 +1705,29 @@ tbody tr:hover{background:rgba(103,132,103,.045);}
       <div class="form-grid">
 
         <div>
+
+          <label>
+            Título
+          </label>
+
+          <input
+            id="propertyTitle"
+            required
+            placeholder="Ej. Casa independiente en Playa"
+          >
+
+        </div>
+
+
+        <div>
           <label for="propertyCode">Código de propiedad</label>
-          <input id="propertyCode" placeholder="AK-001" autocomplete="off">
-          <small style="color:#777">Se propone automáticamente; puedes editarlo.</small>
+          <input id="propertyCode" type="text" placeholder="Ej. CD 120" autocomplete="off">
         </div>
 
         <div>
-          <label for="propertyTitle">Nombre de la propiedad</label>
-          <input id="propertyTitle" required placeholder="Ej. Casa independiente en Playa">
-        </div>
-
-        <div class="full-width">
-          <label for="propertyPrice">Precio que verá el público</label>
-          <input id="propertyPrice" type="text" placeholder="Ej. 45 000 USD, Consultar precio o Precio negociable">
-          <small style="color:#777">Si escribes una cantidad, se conservará también como precio numérico para los filtros.</small>
+          <label for="propertyPriceDisplay">Precio visible (texto libre)</label>
+          <input id="propertyPriceDisplay" type="text" placeholder="Ej. 120.000 USD · Negociable · A consultar">
+          <small style="color:#777">Puedes escribir cifras, moneda o mensajes como “A consultar”.</small>
         </div>
 
 
@@ -1828,16 +1869,19 @@ tbody tr:hover{background:rgba(103,132,103,.045);}
 
       <div class="form-actions">
 
-        <button type="button" class="btn btn-light" onclick="closeModal('propertyModal')">
-          <i data-lucide="x"></i> Cancelar
+        <button
+          type="button"
+          class="btn btn-light"
+          onclick="closeModal('propertyModal')"
+        >
+          Cancelar
         </button>
 
-        <button type="submit" class="btn btn-light" data-save-action="save">
-          <i data-lucide="save"></i> Guardar
-        </button>
-
-        <button type="submit" class="btn btn-green" data-save-action="publish">
-          <i data-lucide="send"></i> Guardar y publicar
+        <button
+          type="submit"
+          class="btn btn-green"
+        >
+          Guardar propiedad
         </button>
 
       </div>
@@ -2445,6 +2489,41 @@ async function loadEverything(){
 }
 
 
+function normalizeList(value){
+  if(Array.isArray(value)){
+    return value.filter(Boolean).map(String);
+  }
+
+  if(typeof value === "string"){
+    const raw=value.trim();
+    if(!raw) return [];
+
+    try{
+      const parsed=JSON.parse(raw);
+      if(Array.isArray(parsed)){
+        return parsed.filter(Boolean).map(String);
+      }
+    }catch(error){
+      // Si no es JSON, se trata como una lista separada por comas.
+    }
+
+    return raw
+      .split(",")
+      .map(item=>item.trim())
+      .filter(Boolean);
+  }
+
+  return [];
+}
+
+function normalizePropertyRecord(property){
+  return {
+    ...property,
+    images: normalizeList(property?.images),
+    tags: normalizeList(property?.tags)
+  };
+}
+
 async function loadProperties(){
 
   const {
@@ -2476,7 +2555,7 @@ async function loadProperties(){
 
 
   properties =
-    data || [];
+    (data || []).map(normalizePropertyRecord);
 
 }
 
@@ -2782,6 +2861,10 @@ function renderProperties(){
 
             property.title,
 
+            property.code,
+
+            property.price_display,
+
             property.location,
 
             property.description
@@ -2930,11 +3013,7 @@ function renderProperties(){
 
 
           const imageCount =
-            Array.isArray(
-              property.images
-            )
-              ? property.images.length
-              : 0;
+            normalizeList(property.images).length;
 
 
           return `
@@ -2953,14 +3032,9 @@ function renderProperties(){
                 </div>
 
                 <div class="property-location">
-
-                  ${escapeHTML(
-                    property.location ||
-                    "Sin ubicación"
-                  )}
-
+                  ${property.code ? `<strong class="code-chip">${escapeHTML(property.code)}</strong> · ` : ""}
+                  ${escapeHTML(property.location || "Sin ubicación")}
                   · ${imageCount} foto(s)
-
                 </div>
 
               </td>
@@ -3176,17 +3250,6 @@ function renderProperties(){
 
 
 /* =========================================================
-   CÓDIGOS DE PROPIEDAD
-   ========================================================= */
-function generateNextPropertyCode(){
-  const used = (Array.isArray(properties) ? properties : [])
-    .map(p => String(p.code || "").trim().toUpperCase())
-    .map(code => { const m = code.match(/^AK-(\d+)$/); return m ? Number(m[1]) : 0; });
-  const next = Math.max(0, ...used) + 1;
-  return "AK-" + String(next).padStart(3, "0");
-}
-
-/* =========================================================
    NUEVA PROPIEDAD
    ========================================================= */
 
@@ -3216,8 +3279,6 @@ function openPropertyModal(){
       "";
 
 
-  document.getElementById("propertyCode").value = generateNextPropertyCode();
-
   document
     .getElementById(
       "propertyTitle"
@@ -3226,12 +3287,8 @@ function openPropertyModal(){
       "";
 
 
-  document
-    .getElementById(
-      "propertyPrice"
-    )
-    .value =
-      "";
+  document.getElementById("propertyCode").value = "";
+  document.getElementById("propertyPriceDisplay").value = "";
 
 
   document
@@ -3355,11 +3412,7 @@ function editProperty(id){
 
 
   currentImages =
-    Array.isArray(
-      property.images
-    )
-      ? [...property.images]
-      : [];
+    normalizeList(property.images);
 
 
   document
@@ -3378,8 +3431,6 @@ function editProperty(id){
       property.id;
 
 
-  document.getElementById("propertyCode").value = property.code || "";
-
   document
     .getElementById(
       "propertyTitle"
@@ -3388,12 +3439,9 @@ function editProperty(id){
       property.title || "";
 
 
-  document
-    .getElementById(
-      "propertyPrice"
-    )
-    .value =
-      property.price_display || (property.price ?? "");
+  document.getElementById("propertyCode").value = property.code || "";
+  document.getElementById("propertyPriceDisplay").value =
+    property.price_display ?? (property.price == null ? "" : formatPrice(property.price));
 
 
   document
@@ -3409,7 +3457,7 @@ function editProperty(id){
       "propertyDescription"
     )
     .value =
-      property.desciption || property.description || "";
+      property.description || "";
 
 
   document
@@ -3524,11 +3572,12 @@ async function saveProperty(event){
       .trim();
 
 
-  const code = document.getElementById("propertyCode").value.trim() || generateNextPropertyCode();
-  const priceDisplay = document.getElementById("propertyPrice").value.trim();
-  const numericMatch = priceDisplay.replace(/[\s,]/g, "").match(/-?\d+(?:\.\d+)?/);
+  const code = document.getElementById("propertyCode").value.trim();
+  const price_display = document.getElementById("propertyPriceDisplay").value.trim();
+
+  // Conserva el campo numérico antiguo si la tabla aún lo utiliza en filtros/compatibilidad.
+  const numericMatch = price_display.replace(/,/g, "").match(/-?\d+(?:\.\d+)?/);
   const price = numericMatch ? Number(numericMatch[0]) : null;
-  const saveAction = event.submitter?.dataset.saveAction || "save";
 
 
   const location =
@@ -3571,7 +3620,12 @@ async function saveProperty(event){
       .filter(Boolean);
 
 
-  const published = saveAction === "publish" || document.getElementById("propertyPublished").checked;
+  const published =
+    document
+      .getElementById(
+        "propertyPublished"
+      )
+      .checked;
 
 
   const cliente_id =
@@ -3615,12 +3669,19 @@ async function saveProperty(event){
 
 
     const payload = {
-      code,
+
       title,
-      price: Number.isFinite(price) ? price : null,
-      price_display: priceDisplay || (Number.isFinite(price) ? String(price) : "Consultar precio"),
-      // La columna real de Supabase está escrita "desciption"; conservar ese nombre evita errores al guardar.
-      desciption: description,
+
+      code,
+
+      price_display,
+
+      price:
+        Number.isFinite(price)
+          ? price
+          : null,
+
+      description,
 
       location,
 
@@ -3631,7 +3692,7 @@ async function saveProperty(event){
       tags,
 
       images:
-        currentImages,
+        normalizeList(currentImages),
 
       cliente_id
 
@@ -3686,9 +3747,9 @@ async function saveProperty(event){
 
 
     toast(
-      published
-        ? (id ? "Propiedad actualizada y publicada." : "Propiedad creada y publicada.")
-        : (id ? "Cambios guardados como borrador/no publicada." : "Propiedad guardada sin publicar.")
+      id
+        ? "Propiedad actualizada."
+        : "Propiedad creada correctamente."
     );
 
 
@@ -3721,11 +3782,8 @@ async function saveProperty(event){
       button.disabled =
         false;
 
-      button.disabled = false;
-      button.innerHTML = button.dataset.saveAction === "publish"
-        ? '<i data-lucide="send"></i> Guardar y publicar'
-        : '<i data-lucide="save"></i> Guardar';
-      if (window.lucide) lucide.createIcons();
+      button.textContent =
+        "Guardar propiedad";
 
     }
 
@@ -3887,7 +3945,7 @@ function renderCurrentImages(){
     }
   );
 
-  hydrateAdminStorageImages(grid);
+  hydrateAdminStorageImages(grid,"property");
 
 }
 
@@ -3918,22 +3976,27 @@ async function removeCurrentImage(index){
 
   try{
 
-    const {
-      error
-    } =
-      await db.storage
-        .from(
-          STORAGE_BUCKET
-        )
-        .remove(
-          [path]
-        );
+    const cleanPath =
+      normalizeStoragePath(
+        path,
+        "property"
+      );
 
+    if(cleanPath){
+      const {
+        error
+      } =
+        await db.storage
+          .from(
+            STORAGE_BUCKET
+          )
+          .remove(
+            [cleanPath]
+          );
 
-    if(error){
-
-      throw error;
-
+      if(error){
+        throw error;
+      }
     }
 
 
@@ -3972,74 +4035,146 @@ async function removeCurrentImage(index){
 
 function normalizeStoragePath(path, defaultFolder=""){
   if(!path) return "";
+
   const raw=String(path).trim();
   if(!raw) return "";
-  if(/^https?:\/\//i.test(raw)) return raw;
+
+  // Acepta tanto rutas internas como URLs completas de Supabase Storage.
+  if(/^https?:\/\//i.test(raw)){
+    try{
+      const url=new URL(raw);
+      const marker="/storage/v1/object/";
+      const index=url.pathname.indexOf(marker);
+
+      if(index !== -1){
+        let rest=url.pathname.slice(index + marker.length);
+        rest=rest.replace(/^\/(?:public|sign|authenticated)\//,"");
+
+        const bucketPrefix=STORAGE_BUCKET+"/";
+        if(rest.startsWith(bucketPrefix)){
+          rest=rest.slice(bucketPrefix.length);
+        }
+
+        return decodeURIComponent(rest);
+      }
+    }catch(error){
+      console.warn("URL de Storage no válida:",raw,error);
+    }
+
+    return "";
+  }
 
   let clean=raw.replace(/^\/+/,"");
+
   const bucketPrefix=STORAGE_BUCKET+"/";
-  if(clean.startsWith(bucketPrefix)) clean=clean.slice(bucketPrefix.length);
+  if(clean.startsWith(bucketPrefix)){
+    clean=clean.slice(bucketPrefix.length);
+  }
 
   return clean;
 }
 
 function storagePathCandidates(path, defaultFolder="property"){
   const clean=normalizeStoragePath(path,defaultFolder);
-  if(!clean || /^https?:\/\//i.test(clean)) return clean ? [clean] : [];
+  if(!clean) return [];
 
   const candidates=[];
-  const add=v=>{
-    if(v && !candidates.includes(v)) candidates.push(v);
+  const add=value=>{
+    if(value && !candidates.includes(value)){
+      candidates.push(value);
+    }
   };
 
   add(clean);
 
   if(defaultFolder && !clean.includes("/")){
-    add(defaultFolder.replace(/^\/+|\/+$/g,"")+"/"+clean);
+    add(
+      defaultFolder.replace(/^\/+|\/+$/g,"") +
+      "/" +
+      clean
+    );
   }
 
-  // Compatibilidad con rutas antiguas que pudieron usar "properties".
-  if(!clean.includes("/")) add("properties/"+clean);
-  if(clean.startsWith("properties/")) add("property/"+clean.slice("properties/".length));
-  if(clean.startsWith("property/")) add("properties/"+clean.slice("property/".length));
+  // Compatibilidad con rutas antiguas.
+  if(!clean.includes("/")){
+    add("properties/"+clean);
+  }
+
+  if(clean.startsWith("properties/")){
+    add("property/"+clean.slice("properties/".length));
+  }
+
+  if(clean.startsWith("property/")){
+    add("properties/"+clean.slice("property/".length));
+  }
 
   return candidates;
 }
 
 function publicImageUrl(path, defaultFolder="property"){
   if(!path) return "";
-  const raw=String(path).trim();
-  if(/^https?:\/\//i.test(raw)) return raw;
 
-  const candidate=storagePathCandidates(raw,defaultFolder)[0];
+  const raw=String(path).trim();
+  if(/^https?:\/\//i.test(raw)){
+    return raw;
+  }
+
+  const candidates=storagePathCandidates(raw,defaultFolder);
+  const candidate=candidates[0];
+
   if(!candidate) return "";
 
-  return SUPABASE_URL+"/storage/v1/object/public/"+STORAGE_BUCKET+"/"+
-    candidate.split("/").map(encodeURIComponent).join("/");
+  return SUPABASE_URL +
+    "/storage/v1/object/public/" +
+    STORAGE_BUCKET +
+    "/" +
+    candidate
+      .split("/")
+      .map(encodeURIComponent)
+      .join("/");
 }
 
 const adminImageUrlCache = new Map();
 
 async function resolveAdminStorageImage(path, defaultFolder="property"){
   if(!path) return "";
+
   const raw=String(path).trim();
   if(!raw) return "";
-  if(/^https?:\/\//i.test(raw)) return raw;
-  if(raw.startsWith("blob:") || raw.startsWith("data:")) return raw;
+
+  if(raw.startsWith("blob:") || raw.startsWith("data:")){
+    return raw;
+  }
+
+  if(/^https?:\/\//i.test(raw) && !normalizeStoragePath(raw,defaultFolder)){
+    return raw;
+  }
 
   const candidates=storagePathCandidates(raw,defaultFolder);
   if(!candidates.length) return "";
 
-  const cacheKey=candidates.join("|");
-  if(adminImageUrlCache.has(cacheKey)) return adminImageUrlCache.get(cacheKey);
+  const cacheKey=defaultFolder+"|"+candidates.join("|");
 
-  // 1) Intentar URL pública para cada posible ruta.
+  if(adminImageUrlCache.has(cacheKey)){
+    return adminImageUrlCache.get(cacheKey);
+  }
+
+  // 1) URL pública.
   for(const clean of candidates){
-    const publicUrl=publicImageUrl(clean);
+    const publicUrl=publicImageUrl(clean,defaultFolder);
+
     try{
-      const response=await fetch(publicUrl,{method:"GET",cache:"no-store"});
+      const response=await fetch(
+        publicUrl,
+        {
+          method:"GET",
+          cache:"no-store"
+        }
+      );
+
       if(response.ok){
         const blob=await response.blob();
+
         if(blob && blob.size>0){
           const objectUrl=URL.createObjectURL(blob);
           adminImageUrlCache.set(cacheKey,objectUrl);
@@ -4047,56 +4182,120 @@ async function resolveAdminStorageImage(path, defaultFolder="property"){
         }
       }
     }catch(error){
-      console.warn("URL pública no disponible:",clean,error);
+      console.warn(
+        "URL pública no disponible:",
+        clean,
+        error
+      );
     }
   }
 
-  // 2) Intentar descarga autenticada para cada posible ruta.
+  // 2) Descarga autenticada.
   for(const clean of candidates){
     try{
-      const {data,error}=await db.storage.from(STORAGE_BUCKET).download(clean);
+      const {
+        data,
+        error
+      } =
+        await db.storage
+          .from(STORAGE_BUCKET)
+          .download(clean);
+
       if(!error && data && data.size>0){
         const objectUrl=URL.createObjectURL(data);
         adminImageUrlCache.set(cacheKey,objectUrl);
         return objectUrl;
       }
-      console.warn("No se pudo descargar:",clean,error?.message || error);
     }catch(error){
-      console.warn("Error descargando imagen:",clean,error);
+      console.warn(
+        "Error descargando imagen:",
+        clean,
+        error
+      );
     }
   }
 
-  // 3) Crear URL firmada como último recurso.
+  // 3) URL firmada como último recurso.
   for(const clean of candidates){
     try{
-      const {data,error}=await db.storage.from(STORAGE_BUCKET).createSignedUrl(clean,3600);
+      const {
+        data,
+        error
+      } =
+        await db.storage
+          .from(STORAGE_BUCKET)
+          .createSignedUrl(
+            clean,
+            3600
+          );
+
       if(!error && data?.signedUrl){
-        adminImageUrlCache.set(cacheKey,data.signedUrl);
+        adminImageUrlCache.set(
+          cacheKey,
+          data.signedUrl
+        );
+
         return data.signedUrl;
       }
     }catch(error){
-      console.warn("No se pudo crear URL firmada:",clean,error);
+      console.warn(
+        "No se pudo crear URL firmada:",
+        clean,
+        error
+      );
     }
   }
 
-  console.error("No se encontró la imagen en ninguna ruta candidata:",candidates);
+  console.error(
+    "No se encontró la imagen en Storage:",
+    raw,
+    candidates
+  );
+
   return "";
 }
 
-async function hydrateAdminStorageImages(root=document){
-  const elements=[...root.querySelectorAll("img[data-admin-storage-path]")];
-  await Promise.all(elements.map(async img=>{
-    const value=img.dataset.adminStoragePath;
-    if(!value) return;
-    const src=await resolveAdminStorageImage(value,"property");
-    if(src){
-      img.src=src;
-      img.classList.add("storage-image-loaded");
-    }else{
-      img.removeAttribute("src");
-      img.classList.add("storage-image-error");
-    }
-  }));
+async function hydrateAdminStorageImages(
+  root=document,
+  defaultFolder="property"
+){
+  const elements=[
+    ...root.querySelectorAll(
+      "img[data-admin-storage-path]"
+    )
+  ];
+
+  await Promise.all(
+    elements.map(
+      async img=>{
+        const value=
+          img.dataset.adminStoragePath;
+
+        if(!value) return;
+
+        const src=
+          await resolveAdminStorageImage(
+            value,
+            defaultFolder
+          );
+
+        if(src){
+          img.src=src;
+          img.classList.add(
+            "storage-image-loaded"
+          );
+          img.classList.remove(
+            "storage-image-error"
+          );
+        }else{
+          img.removeAttribute("src");
+          img.classList.add(
+            "storage-image-error"
+          );
+        }
+      }
+    )
+  );
 }
 
 /* =========================================================
@@ -4206,26 +4405,35 @@ async function deleteProperty(id){
 
     if(images.length){
 
-      const {
-        error:
-          storageError
-      } =
-        await db.storage
-          .from(
-            STORAGE_BUCKET
+      const storagePaths =
+        images
+          .map(
+            image =>
+              normalizeStoragePath(
+                image,
+                "property"
+              )
           )
-          .remove(
-            images
+          .filter(Boolean);
+
+      if(storagePaths.length){
+        const {
+          error: storageError
+        } =
+          await db.storage
+            .from(
+              STORAGE_BUCKET
+            )
+            .remove(
+              storagePaths
+            );
+
+        if(storageError){
+          console.warn(
+            "No se pudieron eliminar todas las fotos:",
+            storageError
           );
-
-
-      if(storageError){
-
-        console.warn(
-          "No se pudieron eliminar todas las fotos:",
-          storageError
-        );
-
+        }
       }
 
     }
@@ -4341,6 +4549,7 @@ function renderClients(){
                 ? `
                     <img
                       class="client-photo"
+                      data-admin-storage-path="${escapeAttribute(client.foto_url)}"
                       src="${escapeAttribute(
                         publicImageUrl(client.foto_url,"clients")
                       )}"
@@ -4441,6 +4650,11 @@ function renderClients(){
         }
       )
       .join("");
+
+  hydrateAdminStorageImages(
+    grid,
+    "clients"
+  );
 
 }
 
@@ -4687,8 +4901,11 @@ async function saveClient(event){
 
     if(error) throw error;
 
-    if(file && oldPhoto && !oldPhoto.startsWith("http")){
-      await removeStorageFile(oldPhoto,"clients");
+    if(file && oldPhoto){
+      await removeStorageFile(
+        oldPhoto,
+        "clients"
+      );
     }
 
     toast(id ? "Cliente actualizado." : "Cliente creado correctamente.");
@@ -4780,7 +4997,26 @@ function renderClientFilePreview(file){
 function renderClientPhotoPreview(path){
   const box=document.getElementById("clientPhotoPreview");
   if(!path){box.innerHTML="";return;}
-  box.innerHTML=`<div class="client-upload-preview"><img src="${escapeAttribute(publicImageUrl(path,"clients"))}" alt="Foto actual"><div class="preview-meta"><strong>Foto actual</strong><div class="file-name">Selecciona otra para reemplazarla</div></div></div>`;
+  box.innerHTML=`
+    <div class="client-upload-preview">
+      <img
+        data-admin-storage-path="${escapeAttribute(path)}"
+        src="${escapeAttribute(publicImageUrl(path,"clients"))}"
+        alt="Foto actual"
+      >
+      <div class="preview-meta">
+        <strong>Foto actual</strong>
+        <div class="file-name">
+          Selecciona otra para reemplazarla
+        </div>
+      </div>
+    </div>
+  `;
+
+  hydrateAdminStorageImages(
+    box,
+    "clients"
+  );
 }
 
 function setUploadProgress(type,percent,message){
@@ -4882,8 +5118,11 @@ async function deleteClient(id){
 
 
   const clientToDelete = clients.find(c => String(c.id) === String(id));
-  if(clientToDelete?.foto_url && !clientToDelete.foto_url.startsWith("http")){
-    await removeStorageFile(clientToDelete.foto_url,"clients");
+  if(clientToDelete?.foto_url){
+    await removeStorageFile(
+      clientToDelete.foto_url,
+      "clients"
+    );
   }
 
   toast(
@@ -4979,14 +5218,9 @@ function formatPrice(value){
   }
 
 
-  return new Intl.NumberFormat(
-    "es-ES",
-    {
-      maximumFractionDigits:2
-    }
-  ).format(
-    Number(value)
-  ) + " USD";
+  const number = Number(value);
+  if(!Number.isFinite(number)) return String(value);
+  return new Intl.NumberFormat("es-ES",{maximumFractionDigits:2}).format(number) + " USD";
 
 }
 
