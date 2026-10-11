@@ -2854,7 +2854,8 @@ function renderProperties(list){
 
     const image =
       p.hero ||
-      "villa-fondo.png";
+      (p.images && p.images[0]) ||
+      "";
 
 
     card.innerHTML = `
@@ -2862,10 +2863,11 @@ function renderProperties(list){
       <div class="property-image">
 
         <img
-          src="${esc(image)}"
+          src="${image ? esc(image) : "villa-fondo.png"}"
+          data-storage-path="${esc(image)}"
           alt="${esc(p.title || "Propiedad Akasa")}"
           loading="lazy"
-          onerror="this.src='villa-fondo.png'"
+          onerror="if(this.dataset.storagePath){this.dataset.imageLoadFailed='true'}else{this.src='villa-fondo.png'}"
         >
 
         <span class="badge">
@@ -3029,13 +3031,14 @@ function updateModal(){
       : [p.hero];
 
 
-  $("#modalImage").src =
-    images[currentImage] ||
-    "villa-fondo.png";
+  const modalImage = $("#modalImage");
+  const activeImage = images[currentImage] || "";
 
-
-  $("#modalImage").alt =
+  modalImage.alt =
     p.title || "Propiedad";
+
+  // Resolver la ruta guardada en Supabase al abrir/cambiar la foto.
+  setImageFromStorage(modalImage, activeImage, "villa-fondo.png");
 
 
   $("#galleryCount").textContent =
