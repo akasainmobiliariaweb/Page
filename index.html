@@ -2576,62 +2576,53 @@ async function resolveStorageImage(value){
   const raw = String(value).trim();
   if(!raw) return "";
 
-  if(raw.startsWith("blob:") || raw.startsWith("data:")){
-    return raw;
+  // Las imágenes locales o previsualizaciones se conservan tal cual.
+  if(raw.startsWith("blob:") || raw.startsWith("data:")) return raw;
+
+  // Las imágenes externas que no pertenecen a Supabase no se alteran.
+  const clean = cleanStoragePath(raw);
+  if(isHttpUrl(raw) && !clean) return raw;
+
+  // El bucket es público: construir directamente la URL pública de Storage.
+  // Evita descargar cada imagen como blob y evita depender de una sesión admin,
+  // de enlaces firmados o de la función Edge property-image-url.
+  const path = clean || raw.replace(/^\/+/, "");
+  const publicUrl = storagePublicUrl(path);
+  return publicUrl || raw;
+}
+
+function normalizeList(value){
+  if(Array.isArray(value)) return value.filter(Boolean).map(String);
+  if(typeof value === "string"){
+    const raw=value.trim();
+    if(!raw) return [];
+    try{
+      const parsed=JSON.parse(raw);
+      if(Array.isArray(parsed)) return parsed.filter(Boolean).map(String);
+      if(typeof parsed === "string" && parsed.trim()) return [parsed.trim()];
+    }catch(_){}
+    return raw.split(",").map(item=>item.trim()).filter(Boolean);
   }
-
-  if(isHttpUrl(raw) && !cleanStoragePath(raw)){
-    return raw;
-  }
-
-  const candidates = storageCandidates(raw);
-
-  for(const path of candidates){
-    if(imageUrlCache.has(path)){
-      return imageUrlCache.get(path);
-    }
-
-    // 1. Intentar URL pública.
-    const publicUrl = storagePublicUrl(path);
-
-    if(publicUrl){
-      try{
-        const response = await fetch(publicUrl, {
-          method:"GET",
-          cache:"no-store"
-        });
-
-        if(response.ok){
-          const blob = await response.blob();
-          if(blob && blob.size > 0){
-            const objectUrl = URL.createObjectURL(blob);
-            imageUrlCache.set(path, objectUrl);
-            return objectUrl;
-          }
-        }
-      }catch(error){
-        console.warn("URL pública no disponible:", path, error);
-      }
-    }
-
-    // 2. Intentar descarga mediante Supabase Storage.
-    const downloaded = await tryStorageDownload(path);
-    if(downloaded){
-      imageUrlCache.set(path, downloaded);
-      return downloaded;
-    }
-  }
-
-  console.error("No se encontró la fotografía en Storage:", raw, candidates);
-  return "";
+  return value ? [String(value)] : [];
 }
 
 function normalizeProperty(p){
-  const images = Array.isArray(p.images)
-    ? p.images.filter(Boolean).map(String)
-    : [];
+  // El administrador guarda las imágenes en `images`; según versiones antiguas,
+  // también pueden existir como texto JSON o en campos alternativos.
+  const images = [
+    ...normalizeList(p.images),
+    ...normalizeList(p.photos),
+    ...normalizeList(p.photo),
+    ...normalizeList(p.image_urls),
+    ...normalizeList(p.image_url),
+    ...normalizeList(p.image)
+  ].filter((value,index,all)=>value && all.indexOf(value)===index);
 
-  const hero = p.hero ? String(p.hero) : (images[0] || "");
+  const hero = normalizeList(p.hero)[0] ||
+    normalizeList(p.cover_image)[0] ||
+    normalizeList(p.main_image)[0] ||
+    normalizeList(p.image_url)[0] ||
+    normalizeList(p.image)[0] || images[0] || "";
 
   return {
     ...p,
@@ -2640,7 +2631,7 @@ function normalizeProperty(p){
     code: p.code || "AKASA",
     images,
     hero,
-    tags:Array.isArray(p.tags) ? p.tags : []
+    tags: normalizeList(p.tags)
   };
 }
 
@@ -2854,8 +2845,7 @@ function renderProperties(list){
 
     const image =
       p.hero ||
-      (p.images && p.images[0]) ||
-      "";
+      "villa-fondo.png";
 
 
     card.innerHTML = `
@@ -2863,11 +2853,11 @@ function renderProperties(list){
       <div class="property-image">
 
         <img
-          src="${image ? esc(image) : "villa-fondo.png"}"
+          src="${esc(storagePublicUrl(image) || image)}"
           data-storage-path="${esc(image)}"
           alt="${esc(p.title || "Propiedad Akasa")}"
           loading="lazy"
-          onerror="if(this.dataset.storagePath){this.dataset.imageLoadFailed='true'}else{this.src='villa-fondo.png'}"
+          onerror="this.src='villa-fondo.png'"
         >
 
         <span class="badge">
@@ -3032,13 +3022,16 @@ function updateModal(){
 
 
   const modalImage = $("#modalImage");
-  const activeImage = images[currentImage] || "";
+  const modalImageValue = images[currentImage] || "";
+  if(modalImageValue){
+    setImageFromStorage(modalImage, modalImageValue, "villa-fondo.png");
+  }else{
+    modalImage.src = "villa-fondo.png";
+  }
 
-  modalImage.alt =
+
+  $("#modalImage").alt =
     p.title || "Propiedad";
-
-  // Resolver la ruta guardada en Supabase al abrir/cambiar la foto.
-  setImageFromStorage(modalImage, activeImage, "villa-fondo.png");
 
 
   $("#galleryCount").textContent =
